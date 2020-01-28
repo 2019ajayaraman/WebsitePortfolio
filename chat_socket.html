@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="css/nav.css">
+        <link rel="stylesheet" type="text/css" href="css/socketchat.css">
+        <link href="https://fonts.googleapis.com/css?family=Tangerine:400,700" rel="stylesheet">
+        <title>Socket Chat</title>
+        
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>    
+    
+        <script>
+            // create the socket object. you need to add a path when you run in subspace, like us
+            var socket = io.connect('https://user.tjhsst.edu/', { path: '/2019ajayaram/socket.io/'  });
+            socket.on('server_msg', function(respond){    // create a client-side callback function
+                
+                console.log(respond);
+                //document.getElementById("response").innerHTML = "";
+                //for (var i = 0; i<respond.length; i++){
+                    var myString = respond[1].replace(/(\r\n|\n|\r)/gm, "<br />");
+                    
+                    var divE = document.createElement("DIV"); 
+                    
+                    var name = document.createElement("P"); 
+                    name.innerHTML = respond[0]; 
+                    
+                    name.style.display = "inline-block";
+                    
+                    divE.appendChild(name);
+                    
+                    
+                    var para = document.createElement("P");             
+                    para.innerHTML = myString;                
+                    
+                    divE.style.width = "90%";
+                    para.style.backgroundColor = "#e1baff";
+                    para.style.width = "85%"
+                    para.style.padding = "5px";
+                    name.style.padding = "5px";
+                    para.style.display = "inline-block";
+                    
+                    divE.appendChild(para);
+                    
+                    document.getElementById("response").appendChild(divE);
+                    document.getElementById("user").innerHTML = respond[0];   
+                //}
+                
+
+                
+                
+                
+                /*console.log(respond);
+                document.getElementById("response").innerHTML = "";
+                for (var i = 0; i<respond.length; i++){
+                    var myString = respond[i][1].replace(/(\r\n|\n|\r)/gm, "<br />");
+                    
+                    var divE = document.createElement("DIV"); 
+                    
+                    var name = document.createElement("P"); 
+                    name.innerHTML = respond[i][0]; 
+                    
+                    name.style.display = "inline-block";
+                    
+                    divE.appendChild(name);
+                    
+                    
+                    var para = document.createElement("P");             
+                    para.innerHTML = myString;                
+                    
+                    divE.style.width = "90%";
+                    para.style.backgroundColor = "#e1baff";
+                    para.style.width = "85%"
+                    para.style.padding = "5px";
+                    name.style.padding = "5px";
+                    para.style.display = "inline-block";
+                    
+                    divE.appendChild(para);
+                    
+                    document.getElementById("response").appendChild(divE);
+                    document.getElementById("user").innerHTML = respond[i][0];   
+                }
+                
+                //p = document.getElementById('response');
+                //p.innerHTML = "HI";*/
+            });
+        </script>
+        
+        <script type="text/javascript">
+            function doSocket() {
+                var dict = document.getElementById('message').value;
+                socket.emit('client_evt', /*{ keys : 'values'}*/dict ); // client-side socket emit
+            }
+        </script>
+        
+    </head>
+    
+    
+    
+    
+    <body id="body">
+        
+        <ul>
+            <li><a href="about">About</a></li>
+            <li><a href="/2019ajayaram">Home</a></li>
+            <li><a class="active" href="javascript:void(0)">Settings</a></li>
+            <li class="view" style="float:right"><a id="user" class="active" href="javascript:void(0)"></a></li>
+        </ul>
+        
+        <h1 class="title">Socket Chat</h1>
+        <div style="text-align: center;">
+            
+        <textarea wrap="hard" style="display: inline-block" id="message" name="message" rows="4" cols="50"  placeholder="message..."></textarea><br>
+        <button style="display: inline-block" type="button" id="submit" onclick="doSocket()">Submit</button>
+        </div>
+        
+        
+        <div id='response'></div>
+        
+    </body>
+</html>

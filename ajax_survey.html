@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Simple AJAX Survey</title>
+        <link rel="stylesheet" type="text/css" href="css/nav.css">
+        <link rel="stylesheet" type="text/css" href="css/formAjax.css">
+        <link href="https://fonts.googleapis.com/css?family=Tangerine:400,700" rel="stylesheet">
+       
+    </head>
+    <body>
+        
+        <ul>
+            <li><a href="about">About</a></li>
+            <li><a href="/2019ajayaram">Home</a></li>
+            <li><a class="active" href="javascript:void(0)">Settings</a></li>
+        </ul>
+        
+        
+        <h1 class="title">Simple Color Survey</h1>
+        
+        <form id="myForm" name="myForm">
+		    <div>Which color do you like better?</div>
+		    <input type="radio" id="color" name="color" value="purple"><span class="purp">purple</span>
+		    <input type="radio" id="color" name="color" value="green"><span class="grn">green</span><br><br>
+		    <button class="font" type="button" onclick="validate()">Submit</button>
+		    <button class="font" type="button" onclick="update()">Update Results</button>
+		    <button class="font" type="button" onclick="resetSurvey()">Reset Survey</button>
+	    </form> 
+	    
+	    
+	    
+	    <br>
+	    <div id="message"></div>
+	    <div id="results">
+	        <h3>Results</h3>
+	        
+	        <div class="purp">Purple: <span id="purple"></span></div>
+	        <div class="grn">Green: <span id="green"></span></div>
+	    </div>
+    
+    
+    
+    
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <script type="text/javascript">
+            
+            function resetSurvey() {
+                var pass = prompt("Please enter the password to reset the results.", "Password");
+                
+                if (pass!="12345qwerty"){
+                    alert("The password you entered is incorrect.");
+                }
+                
+                else {
+                    
+                    document.getElementById("results").style.visibility = "hidden";
+                    document.getElementById("message").style.visibility = "hidden";
+                
+                    $.get({
+				        url: 'ajax_survey_clear',
+				        data: $('#myForm').serialize(),
+			        });
+
+                }
+                
+            }
+            function validate() {
+                
+                var radio = document.getElementsByName('color')
+                
+                color = "";
+                
+                for (var i = 0; i<radio.length; i++){
+                    if (radio[i].checked){
+                        color = radio[i].value;
+                    }
+                }
+                
+                if (color == '' ) {
+		            console.log('missing type');
+		            document.getElementById("message").style.visibility = "visible";
+		            $('#message').html('Missing Input - Cannot Display Data');
+		            document.getElementById("results").style.visibility = "hidden";
+		            return null;
+		        }
+                
+                colorResults();
+                
+            }
+            
+
+            
+            function update() {
+
+                $.get({
+				url: 'ajax_survey_update',
+				data: $('#myForm').serialize(),
+				success: function(data){
+					n=data;
+					
+					var count = data['count'];
+			        var pData = Math.round((data['purple']/count)*10000)/100;
+			        var gData = Math.round((data['green']/count)*10000)/100;
+			        
+			        var valid = data['valid'];
+			        
+			        if (valid){
+			            $('#purple').html(pData+"%");
+			            $('#green').html(gData+"%");
+
+			            document.getElementById("results").style.visibility = "visible";
+			            document.getElementById("message").style.visibility = "hidden";
+			            $('#message').html('');
+			        }
+			        else {
+			            document.getElementById("message").style.visibility = "visible";
+			            $('#message').html('Not enough people have taken the survey to display results!');
+			            document.getElementById("results").style.visibility = "hidden";
+			        }
+
+					console.log(data);
+				},
+				error: function(data){
+
+				}
+			});
+            }
+		    
+
+            function colorResults() {
+
+	            $.get({
+				url: 'ajax_survey_endpoint',
+				data: $('#myForm').serialize(),
+				success: function(data){
+					n=data;
+					
+					var count = data['count'];
+			        var pData = Math.round((data['purple']/count)*10000)/100;
+			        var gData = Math.round((data['green']/count)*10000)/100;
+			        
+			        var valid = data['valid'];
+			        
+			        if (valid){
+			            $('#purple').html(pData+"%");
+			            $('#green').html(gData+"%");
+
+			            document.getElementById("results").style.visibility = "visible";
+			            document.getElementById("message").style.visibility = "hidden";
+			            $('#message').html('');
+			        }
+			        else {
+			            document.getElementById("message").style.visibility = "visible";
+			            $('#message').html('Not enough people have taken the survey to display results!');
+			            document.getElementById("results").style.visibility = "hidden";
+			        }
+
+					console.log(data);
+				},
+				error: function(data){
+
+				}
+			});
+	        
+	        
+            }
+            
+
+        </script>
+
+        
+    
+        
+    </body>
+</html>

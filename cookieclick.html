@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/nav.css">
+    <link rel="stylesheet" type="text/css" href="css/cookieclick.css"> 
+    <link href="https://fonts.googleapis.com/css?family=Tangerine:400,700" rel="stylesheet">
+    <title>Cookie Clicker</title>
+</head>
+<body>
+    <ul>
+        <li><a href="about">About</a></li>
+        <li><a href="/2019ajayaram">Home</a></li>
+        <li><a class="active" href="javascript:void(0)">Settings</a></li>
+    </ul>
+    
+    
+
+    <h1 class="title">Cookie Clicker</h1>
+    
+    <p id="cookieVal">0</p>
+    
+    <button class="font" type="button" onclick="cookieClick()" id="cookieSell">Sell Cookies</button>
+    <div class="tooltip"> <button class="font" type="button" onclick="cookieBoost()" id="cookieBoost">$10</button>
+        <span class="tooltiptext" id="boostBuyInfo"></span>
+    </div>
+  
+    <button class="font" type="button" onclick="saveValid()" id="save">Save</button>
+    
+    <form id="submInfo">
+        <input type="text" name="scoreMoney" id="scoreMoney">
+        <input type="text" name="boostNum" id="boostNum">
+    </form>
+    
+    
+    <!-- PLANNING ???
+        -BUNCH of buttons 
+        -Cookie as button (start off w/ regular button)
+        -Purchase multi sell (edit booster) 
+        -Display of clicks/cookies sold
+    -->
+
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script type="text/javascript" src="js/cookieclick.js"></script> 
+
+
+
+</body>
+</html>
+

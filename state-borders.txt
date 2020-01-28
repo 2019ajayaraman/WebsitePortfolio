@@ -1,0 +1,275 @@
+//STATE BORDERS
+
+app.get('/', function(req, res){
+    
+    
+    
+    res.send('<h1><em>State Borders</em></h1><u>Instructions</u></br>You may use 4 different functions through 4 different handlers:</br><ol><li><em>doStatesBorder</em>: This function returns a boolean of whether two states share a border. There are two different inputs - s1 and s2, the names or abbreviations of states (not case-specific). Go to <a href="https://user.tjhsst.edu/2019ajayaram/do_states_border">https://user.tjhsst.edu/2019ajayaram/do_states_border</a>, add a \'?\', and define the two variables s1 and s2. Separate the definitions wtih an \'&\'.</li></br><li><em>getStateBorders</em>: This function returns a list of states that border the inputted state. There is one input - s1, the name or abbreviation of a state (not case-specific). Go to <a href="https://user.tjhsst.edu/2019ajayaram/get_state_borders">https://user.tjhsst.edu/2019ajayaram/get_state_borders</a>, add a \'?\', and define the variable s1.</li></br><li><em>getCloseStates</em>: This function returns a list of states that are reachable from the inputted state by crossing at most two state borders. There is one input - s1, the name or abbreviation of a state (not case-specific). Go to <a href="https://user.tjhsst.edu/2019ajayaram/get_close_states">https://user.tjhsst.edu/2019ajayaram/get_close_states</a>, add a \'?\', and define the variable s1.</li></br><li><em>statesWithBorders</em>: This function returns a list of states with the inputted number of borders. There is one input - n, the number representing the number of borders. Go to <a href="https://user.tjhsst.edu/2019ajayaram/states_with_borders">https://user.tjhsst.edu/2019ajayaram/states_with_borders</a>, add a \'?\', and define the variable n.</li></ol>');
+    
+    
+    
+    
+});
+
+
+app.get('/state_borders', function (req, res){
+    var borders = require('./state_borders.js');
+    
+    var s1 = req.query.s1;
+    var s2 = req.query.s2;
+    var num = req.query.n
+    
+    ip = req.headers['x-real-ip'];
+        
+        console.log("User IP Address: "+ip);
+        console.log('Function called: doStatesBorder');
+        console.log('Input: s1 = '+s1+', s2 = '+s2+', n = '+num);
+        console.log();
+    
+    
+    if (s1 != undefined && s2 == undefined)
+    {
+        var state = borders.getState(s1);
+    
+        var sBord = borders.getStateBorders(state);
+        
+    
+        
+        
+        if (sBord == undefined )
+        {
+            res.send ('<h3>StateBorders</h3>Error: Input is not valid. Bad value passed for state name.</br></br><u>Instructions</u></br>There are 3 possible inputs - s1, s2, or n. If you want doStatesBorder, define both s1 and s2. If you want getStateBorders, define s1. If you want getCloseStates, define s2. If you want statesWithBorders, define n. ');
+    
+        }
+        
+        res.send("getStateBorders: "+sBord.join(", "));
+        
+    }
+    else if (s2 != undefined && s1 == undefined)
+    {
+        var state = borders.getState(s2);
+        
+        var tBord = borders.getCloseStates(state);
+    
+        
+        
+        if (tBord == undefined)
+        {
+            res.send ('<h3>StateBorders</h3>Error: Input is not valid. Bad value passed for state name.</br></br><u>Instructions</u></br>There are 3 possible inputs - s1, s2, or n. If you want doStatesBorder, define both s1 and s2. If you want getStateBorders, define s1. If you want getCloseStates, define s2. If you want statesWithBorders, define n. ');
+    
+        }
+        
+        res.send("getCloseStates: "+tBord.join(", "));
+        
+    }
+    else if (s1 !=undefined && s2 != undefined && isNaN(s1) && isNaN(s2))
+    {
+        var state1 = borders.getState(s1);
+        var state2 = borders.getState(s2);
+        
+        var dBorder = borders.doStatesBorder(state1, state2);
+        
+        if (dBorder == undefined)
+        {
+            res.send ('<h3>StateBorders</h3>Error: Input is not valid. Bad value passed for state name.</br></br><u>Instructions</u></br>There are 3 possible inputs - s1, s2, or n. If you want doStatesBorder, define both s1 and s2. If you want getStateBorders, define s1. If you want getCloseStates, define s2. If you want statesWithBorders, define n. ');
+    
+        }
+        
+        
+        res.send("doStatesBorder: "+ dBorder);
+    }
+    else if (num != undefined && !isNaN(num))
+    {
+        var sBord = borders.statesWithBorders(num);
+    
+    
+        if (sBord.length === 0){
+            res.send('none');   
+        }
+    
+        res.send("staesWithBorder: "+sBord.join(", "));
+    }
+    else
+    {
+        res.send ('<h3>StateBorders</h3>Error: Input is not valid. </br></br><u>Instructions</u></br>There are 3 possible inputs - s1, s2, or n. If you want doStatesBorder, define both s1 and s2. If you want getStateBorders, define s1. If you want getCloseStates, define s2. If you want statesWithBorders, define n. ');
+    
+    }
+    
+    
+})
+
+
+app.get('/do_states_border', function(req, res){
+    var borders = require('./state_borders.js');
+    
+    var s1 = req.query.s1;
+    var s2 = req.query.s2;
+    
+    ip = req.headers['x-real-ip'];
+        
+        console.log("User IP Address: "+ip);
+        console.log('Function called: doStatesBorder');
+        console.log('Input: s1 = '+s1+', s2 = '+s2);
+        console.log();
+    
+    
+    if (s1 == null || s2 == null || s1 == undefined || s2 == undefined)
+    {
+        res.send ('<h3>doStatesBorder</h3>Error: Input is not valid. Define s1 and s2.</br></br><u>Instructions</u></br>You may use 4 different functions through 4 different handlers:</br><ol><li><em>doStatesBorder</em>: This function returns a boolean of whether two states share a border. There are two different inputs - s1 and s2, the names or abbreviations of states (not case-specific). Go to <a href="https://user.tjhsst.edu/2019ajayaram/do_states_border">https://user.tjhsst.edu/2019ajayaram/do_states_border</a>, add a \'?\', and define the two variables s1 and s2. Separate the definitions wtih an \'&\'.</li></br><li><em>getStateBorders</em>: This function returns a list of states that border the inputted state. There is one input - s1, the name or abbreviation of a state (not case-specific). Go to <a href="https://user.tjhsst.edu/2019ajayaram/get_state_borders">https://user.tjhsst.edu/2019ajayaram/get_state_borders</a>, add a \'?\', and define the variable s1.</li></br><li><em>getCloseStates</em>: This function returns a list of states that are reachable from the inputted state by crossing at most two state borders. There is one input - s1, the name or abbreviation of a state (not case-specific). Go to <a href="https://user.tjhsst.edu/2019ajayaram/get_close_states">https://user.tjhsst.edu/2019ajayaram/get_close_states</a>, add a \'?\', and define the variable s1.</li></br><li><em>statesWithBorders</em>: This function returns a list of states with the inputted number of borders. There is one input - n, the number representing the number of borders. Go to <a href="https://user.tjhsst.edu/2019ajayaram/states_with_borders">https://user.tjhsst.edu/2019ajayaram/states_with_borders</a>, add a \'?\', and define the variable n.</li></ol>');
+    
+    }
+    
+    else if (!isNaN(s1) || !isNaN(s2))
+    {
+        res.send ('<h3>doStatesBorder</h3>Error: Input is not valid. Bad value passed for state name.</br>input: s1='+s1+', s2='+s2+'</br></br><u>Instructions</u></br>You may use 4 different functions through 4 different handlers:</br><ol><li><em>doStatesBorder</em>: This function returns a boolean of whether two states share a border. There are two different inputs - s1 and s2, the names or abbreviations of states (not case-specific). Go to <a href="https://user.tjhsst.edu/2019ajayaram/do_states_border">https://user.tjhsst.edu/2019ajayaram/do_states_border</a>, add a \'?\', and define the two variables s1 and s2. Separate the definitions wtih an \'&\'.</li></br><li><em>getStateBorders</em>: This function returns a list of states that border the inputted state. There is one input - s1, the name or abbreviation of a state (not case-specific). Go to <a href="https://user.tjhsst.edu/2019ajayaram/get_state_borders">https://user.tjhsst.edu/2019ajayaram/get_state_borders</a>, add a \'?\', and define the variable s1.</li></br><li><em>getCloseStates</em>: This function returns a list of states that are reachable from the inputted state by crossing at most two state borders. There is one input - s1, the name or abbreviation of a state (not case-specific). Go to <a href="https://user.tjhsst.edu/2019ajayaram/get_close_states">https://user.tjhsst.edu/2019ajayaram/get_close_states</a>, add a \'?\', and define the variable s1.</li></br><li><em>statesWithBorders</em>: This function returns a list of states with the inputted number of borders. There is one input - n, the number representing the number of borders. Go to <a href="https://user.tjhsst.edu/2019ajayaram/states_with_borders">https://user.tjhsst.edu/2019ajayaram/states_with_borders</a>, add a \'?\', and define the variable n.</li></ol>');
+    
+    }
+    
+    else
+    {
+        
+        var state1 = borders.getState(s1);
+        var state2 = borders.getState(s2);
+        
+        var dBorder = borders.doStatesBorder(state1, state2);
+        
+        if (dBorder == undefined)
+        {
+            res.send ('<h3>doStatesBorder</h3>Error: Input is not valid. Bad value passed for state name.</br>input: s1='+s1+', s2='+s2+'</br></br><u>Instructions</u></br>You may use 4 different functions through 4 different handlers:</br><ol><li><em>doStatesBorder</em>: This function returns a boolean of whether two states share a border. There are two different inputs - s1 and s2, the names or abbreviations of states (not case-specific). Go to <a href="https://user.tjhsst.edu/2019ajayaram/do_states_border">https://user.tjhsst.edu/2019ajayaram/do_states_border</a>, add a \'?\', and define the two variables s1 and s2. Separate the definitions wtih an \'&\'.</li></br><li><em>getStateBorders</em>: This function returns a list of states that border the inputted state. There is one input - s1, the name or abbreviation of a state (not case-specific). Go to <a href="https://user.tjhsst.edu/2019ajayaram/get_state_borders">https://user.tjhsst.edu/2019ajayaram/get_state_borders</a>, add a \'?\', and define the variable s1.</li></br><li><em>getCloseStates</em>: This function returns a list of states that are reachable from the inputted state by crossing at most two state borders. There is one input - s1, the name or abbreviation of a state (not case-specific). Go to <a href="https://user.tjhsst.edu/2019ajayaram/get_close_states">https://user.tjhsst.edu/2019ajayaram/get_close_states</a>, add a \'?\', and define the variable s1.</li></br><li><em>statesWithBorders</em>: This function returns a list of states with the inputted number of borders. There is one input - n, the number representing the number of borders. Go to <a href="https://user.tjhsst.edu/2019ajayaram/states_with_borders">https://user.tjhsst.edu/2019ajayaram/states_with_borders</a>, add a \'?\', and define the variable n.</li></ol>');
+    
+        }
+        
+        
+        res.send(dBorder);
+    }
+    
+    
+});
+
+app.get('/get_state_borders', function(req, res){
+    
+    var borders = require('./state_borders.js');
+    
+    var s1 = req.query.s1;
+    
+    ip = req.headers['x-real-ip'];
+        
+        console.log("User IP Address: "+ip);
+        console.log('Function called: getStateBorders');
+        console.log('Input: s1 = '+s1)
+        console.log();
+    
+    
+    if (s1 == null || s1 == undefined)
+    {
+        res.send ('<h3>getStateBorders</h3>Error: Input is not valid. Define s1.</br></br><u>Instructions</u></br>You may use 4 different functions through 4 different handlers:</br><ol><li><em>doStatesBorder</em>: This function returns a boolean of whether two states share a border. There are two different inputs - s1 and s2, the names or abbreviations of states (not case-specific). Go to <a href="https://user.tjhsst.edu/2019ajayaram/do_states_border">https://user.tjhsst.edu/2019ajayaram/do_states_border</a>, add a \'?\', and define the two variables s1 and s2. Separate the definitions wtih an \'&\'.</li></br><li><em>getStateBorders</em>: This function returns a list of states that border the inputted state. There is one input - s1, the name or abbreviation of a state (not case-specific). Go to <a href="https://user.tjhsst.edu/2019ajayaram/get_state_borders">https://user.tjhsst.edu/2019ajayaram/get_state_borders</a>, add a \'?\', and define the variable s1.</li></br><li><em>getCloseStates</em>: This function returns a list of states that are reachable from the inputted state by crossing at most two state borders. There is one input - s1, the name or abbreviation of a state (not case-specific). Go to <a href="https://user.tjhsst.edu/2019ajayaram/get_close_states">https://user.tjhsst.edu/2019ajayaram/get_close_states</a>, add a \'?\', and define the variable s1.</li></br><li><em>statesWithBorders</em>: This function returns a list of states with the inputted number of borders. There is one input - n, the number representing the number of borders. Go to <a href="https://user.tjhsst.edu/2019ajayaram/states_with_borders">https://user.tjhsst.edu/2019ajayaram/states_with_borders</a>, add a \'?\', and define the variable n.</li></ol>');
+    
+    }
+    
+    else if (!isNaN(s1))
+    {
+        res.send ('<h3>doStatesBorder</h3>Error: Input is not valid. Bad value passed for state name.</br>input: s1='+s1+'</br></br><u>Instructions</u></br>You may use 4 different functions through 4 different handlers:</br><ol><li><em>doStatesBorder</em>: This function returns a boolean of whether two states share a border. There are two different inputs - s1 and s2, the names or abbreviations of states (not case-specific). Go to <a href="https://user.tjhsst.edu/2019ajayaram/do_states_border">https://user.tjhsst.edu/2019ajayaram/do_states_border</a>, add a \'?\', and define the two variables s1 and s2. Separate the definitions wtih an \'&\'.</li></br><li><em>getStateBorders</em>: This function returns a list of states that border the inputted state. There is one input - s1, the name or abbreviation of a state (not case-specific). Go to <a href="https://user.tjhsst.edu/2019ajayaram/get_state_borders">https://user.tjhsst.edu/2019ajayaram/get_state_borders</a>, add a \'?\', and define the variable s1.</li></br><li><em>getCloseStates</em>: This function returns a list of states that are reachable from the inputted state by crossing at most two state borders. There is one input - s1, the name or abbreviation of a state (not case-specific). Go to <a href="https://user.tjhsst.edu/2019ajayaram/get_close_states">https://user.tjhsst.edu/2019ajayaram/get_close_states</a>, add a \'?\', and define the variable s1.</li></br><li><em>statesWithBorders</em>: This function returns a list of states with the inputted number of borders. There is one input - n, the number representing the number of borders. Go to <a href="https://user.tjhsst.edu/2019ajayaram/states_with_borders">https://user.tjhsst.edu/2019ajayaram/states_with_borders</a>, add a \'?\', and define the variable n.</li></ol>');
+    
+    }
+    
+    else
+    {
+        var state = borders.getState(s1);
+    
+        var sBord = borders.getStateBorders(state);
+    
+        
+        
+        if (sBord == undefined)
+        {
+            res.send ('<h3>getStateBorders</h3>Error: Input is not valid. Bad value passed for state name.</br>input: s1='+s1+'</br></br><u>Instructions</u></br>You may use 4 different functions through 4 different handlers:</br><ol><li><em>doStatesBorder</em>: This function returns a boolean of whether two states share a border. There are two different inputs - s1 and s2, the names or abbreviations of states (not case-specific). Go to <a href="https://user.tjhsst.edu/2019ajayaram/do_states_border">https://user.tjhsst.edu/2019ajayaram/do_states_border</a>, add a \'?\', and define the two variables s1 and s2. Separate the definitions wtih an \'&\'.</li></br><li><em>getStateBorders</em>: This function returns a list of states that border the inputted state. There is one input - s1, the name or abbreviation of a state (not case-specific). Go to <a href="https://user.tjhsst.edu/2019ajayaram/get_state_borders">https://user.tjhsst.edu/2019ajayaram/get_state_borders</a>, add a \'?\', and define the variable s1.</li></br><li><em>getCloseStates</em>: This function returns a list of states that are reachable from the inputted state by crossing at most two state borders. There is one input - s1, the name or abbreviation of a state (not case-specific). Go to <a href="https://user.tjhsst.edu/2019ajayaram/get_close_states">https://user.tjhsst.edu/2019ajayaram/get_close_states</a>, add a \'?\', and define the variable s1.</li></br><li><em>statesWithBorders</em>: This function returns a list of states with the inputted number of borders. There is one input - n, the number representing the number of borders. Go to <a href="https://user.tjhsst.edu/2019ajayaram/states_with_borders">https://user.tjhsst.edu/2019ajayaram/states_with_borders</a>, add a \'?\', and define the variable n.</li></ol>');
+    
+        }
+        
+        
+        
+    
+        res.send(sBord);
+        
+    }
+    
+    
+});
+
+app.get('/get_close_states', function(req, res){
+    var borders = require('./state_borders.js');
+    
+    var s1 = req.query.s1;
+    
+    ip = req.headers['x-real-ip'];
+        
+        console.log("User IP Address: "+ip);
+        console.log('Function called: getCloseStates');
+        console.log('Input: s1 = '+s1)
+        console.log();
+    
+    
+    if (s1 == null || s1 == undefined)
+    {
+        res.send ('<h3>getCloseStates</h3>Error: Input is not valid. Define s1.</br></br><u>Instructions</u></br>You may use 4 different functions through 4 different handlers:</br><ol><li><em>doStatesBorder</em>: This function returns a boolean of whether two states share a border. There are two different inputs - s1 and s2, the names or abbreviations of states (not case-specific). Go to <a href="https://user.tjhsst.edu/2019ajayaram/do_states_border">https://user.tjhsst.edu/2019ajayaram/do_states_border</a>, add a \'?\', and define the two variables s1 and s2. Separate the definitions wtih an \'&\'.</li></br><li><em>getStateBorders</em>: This function returns a list of states that border the inputted state. There is one input - s1, the name or abbreviation of a state (not case-specific). Go to <a href="https://user.tjhsst.edu/2019ajayaram/get_state_borders">https://user.tjhsst.edu/2019ajayaram/get_state_borders</a>, add a \'?\', and define the variable s1.</li></br><li><em>getCloseStates</em>: This function returns a list of states that are reachable from the inputted state by crossing at most two state borders. There is one input - s1, the name or abbreviation of a state (not case-specific). Go to <a href="https://user.tjhsst.edu/2019ajayaram/get_close_states">https://user.tjhsst.edu/2019ajayaram/get_close_states</a>, add a \'?\', and define the variable s1.</li></br><li><em>statesWithBorders</em>: This function returns a list of states with the inputted number of borders. There is one input - n, the number representing the number of borders. Go to <a href="https://user.tjhsst.edu/2019ajayaram/states_with_borders">https://user.tjhsst.edu/2019ajayaram/states_with_borders</a>, add a \'?\', and define the variable n.</li></ol>');
+    
+    }
+    else if (!isNaN(s1))
+    {
+        res.send ('<h3>doStatesBorder</h3>Error: Input is not valid. Bad value passed for state name.</br>input: s1='+s1+'</br></br><u>Instructions</u></br>You may use 4 different functions through 4 different handlers:</br><ol><li><em>doStatesBorder</em>: This function returns a boolean of whether two states share a border. There are two different inputs - s1 and s2, the names or abbreviations of states (not case-specific). Go to <a href="https://user.tjhsst.edu/2019ajayaram/do_states_border">https://user.tjhsst.edu/2019ajayaram/do_states_border</a>, add a \'?\', and define the two variables s1 and s2. Separate the definitions wtih an \'&\'.</li></br><li><em>getStateBorders</em>: This function returns a list of states that border the inputted state. There is one input - s1, the name or abbreviation of a state (not case-specific). Go to <a href="https://user.tjhsst.edu/2019ajayaram/get_state_borders">https://user.tjhsst.edu/2019ajayaram/get_state_borders</a>, add a \'?\', and define the variable s1.</li></br><li><em>getCloseStates</em>: This function returns a list of states that are reachable from the inputted state by crossing at most two state borders. There is one input - s1, the name or abbreviation of a state (not case-specific). Go to <a href="https://user.tjhsst.edu/2019ajayaram/get_close_states">https://user.tjhsst.edu/2019ajayaram/get_close_states</a>, add a \'?\', and define the variable s1.</li></br><li><em>statesWithBorders</em>: This function returns a list of states with the inputted number of borders. There is one input - n, the number representing the number of borders. Go to <a href="https://user.tjhsst.edu/2019ajayaram/states_with_borders">https://user.tjhsst.edu/2019ajayaram/states_with_borders</a>, add a \'?\', and define the variable n.</li></ol>');
+    
+    }
+    else
+    {
+        var state = borders.getState(s1);
+    
+        var sBord = borders.getCloseStates(state);
+    
+        
+        
+         if (sBord == undefined)
+        {
+            res.send ('<h3>getCloseStates</h3>Error: Input is not valid. Bad value passed for state name.</br>input: s1='+s1+'</br></br><u>Instructions</u></br>You may use 4 different functions through 4 different handlers:</br><ol><li><em>doStatesBorder</em>: This function returns a boolean of whether two states share a border. There are two different inputs - s1 and s2, the names or abbreviations of states (not case-specific). Go to <a href="https://user.tjhsst.edu/2019ajayaram/do_states_border">https://user.tjhsst.edu/2019ajayaram/do_states_border</a>, add a \'?\', and define the two variables s1 and s2. Separate the definitions wtih an \'&\'.</li></br><li><em>getStateBorders</em>: This function returns a list of states that border the inputted state. There is one input - s1, the name or abbreviation of a state (not case-specific). Go to <a href="https://user.tjhsst.edu/2019ajayaram/get_state_borders">https://user.tjhsst.edu/2019ajayaram/get_state_borders</a>, add a \'?\', and define the variable s1.</li></br><li><em>getCloseStates</em>: This function returns a list of states that are reachable from the inputted state by crossing at most two state borders. There is one input - s1, the name or abbreviation of a state (not case-specific). Go to <a href="https://user.tjhsst.edu/2019ajayaram/get_close_states">https://user.tjhsst.edu/2019ajayaram/get_close_states</a>, add a \'?\', and define the variable s1.</li></br><li><em>statesWithBorders</em>: This function returns a list of states with the inputted number of borders. There is one input - n, the number representing the number of borders. Go to <a href="https://user.tjhsst.edu/2019ajayaram/states_with_borders">https://user.tjhsst.edu/2019ajayaram/states_with_borders</a>, add a \'?\', and define the variable n.</li></ol>');
+    
+        }
+        
+        
+    
+        res.send(sBord);
+        
+    }
+    
+});
+
+app.get('/states_with_borders', function(req, res){
+    var borders = require('./state_borders.js');
+    
+    var num = req.query.n;
+    ip = req.headers['x-real-ip'];
+    
+    console.log("User IP Address: "+ip);
+    console.log('Function called: statesWithBorders');
+    console.log('Input: n = '+num);
+    console.log();
+    
+    if (num == null || num == undefined)
+    {
+        res.send ('<h3>statesWithBorders</h3>Error: Input is not valid. Define n.</br></br><u>Instructions</u></br>You may use 4 different functions through 4 different handlers:</br><ol><li><em>doStatesBorder</em>: This function returns a boolean of whether two states share a border. There are two different inputs - s1 and s2, the names or abbreviations of states (not case-specific). Go to <a href="https://user.tjhsst.edu/2019ajayaram/do_states_border">https://user.tjhsst.edu/2019ajayaram/do_states_border</a>, add a \'?\', and define the two variables s1 and s2. Separate the definitions wtih an \'&\'.</li></br><li><em>getStateBorders</em>: This function returns a list of states that border the inputted state. There is one input - s1, the name or abbreviation of a state (not case-specific). Go to <a href="https://user.tjhsst.edu/2019ajayaram/get_state_borders">https://user.tjhsst.edu/2019ajayaram/get_state_borders</a>, add a \'?\', and define the variable s1.</li></br><li><em>getCloseStates</em>: This function returns a list of states that are reachable from the inputted state by crossing at most two state borders. There is one input - s1, the name or abbreviation of a state (not case-specific). Go to <a href="https://user.tjhsst.edu/2019ajayaram/get_close_states">https://user.tjhsst.edu/2019ajayaram/get_close_states</a>, add a \'?\', and define the variable s1.</li></br><li><em>statesWithBorders</em>: This function returns a list of states with the inputted number of borders. There is one input - n, the number representing the number of borders. Go to <a href="https://user.tjhsst.edu/2019ajayaram/states_with_borders">https://user.tjhsst.edu/2019ajayaram/states_with_borders</a>, add a \'?\', and define the variable n.</li></ol>');
+    
+    }
+    
+    if (isNaN(num))
+    {
+        res.send('<h3>statesWithBorders</h3>Error: Please define n as a number.</br></br><u>Instructions</u></br>You may use 4 different functions through 4 different handlers:</br><ol><li><em>doStatesBorder</em>: This function returns a boolean of whether two states share a border. There are two different inputs - s1 and s2, the names or abbreviations of states (not case-specific). Go to <a href="https://user.tjhsst.edu/2019ajayaram/do_states_border">https://user.tjhsst.edu/2019ajayaram/do_states_border</a>, add a \'?\', and define the two variables s1 and s2. Separate the definitions wtih an \'&\'.</li></br><li><em>getStateBorders</em>: This function returns a list of states that border the inputted state. There is one input - s1, the name or abbreviation of a state (not case-specific). Go to <a href="https://user.tjhsst.edu/2019ajayaram/get_state_borders">https://user.tjhsst.edu/2019ajayaram/get_state_borders</a>, add a \'?\', and define the variable s1.</li></br><li><em>getCloseStates</em>: This function returns a list of states that are reachable from the inputted state by crossing at most two state borders. There is one input - s1, the name or abbreviation of a state (not case-specific). Go to <a href="https://user.tjhsst.edu/2019ajayaram/get_close_states">https://user.tjhsst.edu/2019ajayaram/get_close_states</a>, add a \'?\', and define the variable s1.</li></br><li><em>statesWithBorders</em>: This function returns a list of states with the inputted number of borders. There is one input - n, the number representing the number of borders. Go to <a href="https://user.tjhsst.edu/2019ajayaram/states_with_borders">https://user.tjhsst.edu/2019ajayaram/states_with_borders</a>, add a \'?\', and define the variable n.</li></ol>');
+    
+    }
+    
+    var sBord = borders.statesWithBorders(num);
+    
+    
+    if (sBord.length === 0){
+     res.send('none');   
+    }
+    
+    res.send(sBord);
+});
