@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/nav.css">
+    <link rel="stylesheet" type="text/css" href="css/scrab.css">
+    <link href="https://fonts.googleapis.com/css?family=Tangerine:400,700" rel="stylesheet">
+    <title>Scrabble</title>
+</head>
+<body>
+
+
+    <ul>
+        <li><a href="about">About</a></li>
+        <li><a href="/2019ajayaram">Home</a></li>
+        <li><a class="active" href="javascript:void(0)">Settings</a></li>
+        <li class="view" style="float:right"><a class="active" href="javascript:void(0)">Hi {{name}}!</a></li>
+    </ul>
+    
+    <h1 class="title">Scrabble Word Finder</h1>
+    
+    <div id="instructions">
+        <em>Instructions: </em> Select the number of wildcards you have. Then select the letters you have from the drop down menu. If you have letter positions (optional), from 1 to 7, enter them in the textboxes below the drowdowns. You can only have one letter per location. Lastly, enter the length of the words you want. Then click submit for your results.
+    </div>
+    <br>
+    <div class="form">
+        
+        <!-- Wildcard Choice --> 
+        <div>
+            How many wildcard tiles do you want?<br>
+            <button type="button" class="wild" id="wildC0" onclick="wildC0()">0</button> <button type="button" class="wild" id="wildC1" onclick="wildC1()">1</button> <button  type="button" class="wild" id="wildC2" onclick="wildC2()">2</button>
+        </div>
+        
+        <form id="myForm" name="myForm">
+        
+        <div id="wildcard">
+            <input type="radio" name="wild" id="w0" value="0"> 0<br>
+            <input type="radio" name="wild" id="w1" value="1"> 1<br>
+            <input type="radio" name="wild" id="w2" value="2"> 2<br>
+        </div>
+        
+        <br>
+        
+        <!--Letter Choice-->
+        <table align="center" id="letters">
+            <tr>
+                <th>Letter #1</th>
+                <th>Letter #2</th> 
+                <th>Letter #3</th>
+                <th>Letter #4</th>
+                <th>Letter #5</th>
+                <th>Letter #6</th>
+                <th>Letter #7</th>
+            </tr>
+            <tr>
+                <td>
+                    <select name="letter1" id="letter1">
+                        <option value="NA">None</option>  <option value="a">A</option> <option value="b">B</option> <option value="c">C</option> <option value="d">D</option> <option value="e">E</option> <option value="f">F</option> <option value="g">G</option> <option value="h">H</option> <option value="i">I</option> <option value="j">J</option>
+                        <option value="k">K</option> <option value="l">L</option> <option value="m">M</option> <option value="n">N</option> <option value="o">O</option> <option value="p">P</option> <option value="q">Q</option> <option value="r">R</option> <option value="s">S</option> <option value="t">T</option> <option value="u">U</option> <option value="v">V</option>
+                        <option value="w">W</option> <option value="x">X</option> <option value="y">Y</option> <option value="z">Z</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="letter2" id="letter2">
+                        <option value="NA">None</option> <option value="a">A</option> <option value="b">B</option> <option value="c">C</option> <option value="d">D</option> <option value="e">E</option> <option value="f">F</option> <option value="g">G</option> <option value="h">H</option> <option value="i">I</option> <option value="j">J</option>
+                        <option value="k">K</option> <option value="l">L</option> <option value="m">M</option> <option value="n">N</option> <option value="o">O</option> <option value="p">P</option> <option value="q">Q</option> <option value="r">R</option> <option value="s">S</option> <option value="t">T</option> <option value="u">U</option> <option value="v">V</option>
+                        <option value="w">W</option> <option value="x">X</option> <option value="y">Y</option> <option value="z">Z</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="letter3" id="letter3">
+                        <option value="NA">None</option> <option value="a">A</option> <option value="b">B</option> <option value="c">C</option> <option value="d">D</option> <option value="e">E</option> <option value="f">F</option> <option value="g">G</option> <option value="h">H</option> <option value="i">I</option> <option value="j">J</option>
+                        <option value="k">K</option> <option value="l">L</option> <option value="m">M</option> <option value="n">N</option> <option value="o">O</option> <option value="p">P</option> <option value="q">Q</option> <option value="r">R</option> <option value="s">S</option> <option value="t">T</option> <option value="u">U</option> <option value="v">V</option>
+                        <option value="w">W</option> <option value="x">X</option> <option value="y">Y</option> <option value="z">Z</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="letter4" id="letter4">
+                        <option value="NA">None</option> <option value="a">A</option> <option value="b">B</option> <option value="c">C</option> <option value="d">D</option> <option value="e">E</option> <option value="f">F</option> <option value="g">G</option> <option value="h">H</option> <option value="i">I</option> <option value="j">J</option>
+                        <option value="k">K</option> <option value="l">L</option> <option value="m">M</option> <option value="n">N</option> <option value="o">O</option> <option value="p">P</option> <option value="q">Q</option> <option value="r">R</option> <option value="s">S</option> <option value="t">T</option> <option value="u">U</option> <option value="v">V</option>
+                        <option value="w">W</option> <option value="x">X</option> <option value="y">Y</option> <option value="z">Z</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="letter5" id="letter5">
+                        <option value="NA">None</option> <option value="a">A</option> <option value="b">B</option> <option value="c">C</option> <option value="d">D</option> <option value="e">E</option> <option value="f">F</option> <option value="g">G</option> <option value="h">H</option> <option value="i">I</option> <option value="j">J</option>
+                        <option value="k">K</option> <option value="l">L</option> <option value="m">M</option> <option value="n">N</option> <option value="o">O</option> <option value="p">P</option> <option value="q">Q</option> <option value="r">R</option> <option value="s">S</option> <option value="t">T</option> <option value="u">U</option> <option value="v">V</option>
+                        <option value="w">W</option> <option value="x">X</option> <option value="y">Y</option> <option value="z">Z</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="letter6" id="letter6">
+                        <option value="NA">None</option> <option disabled class="disabl" value="*">Wildcard</option> <option value="a">A</option> <option value="b">B</option> <option value="c">C</option> <option value="d">D</option> <option value="e">E</option> <option value="f">F</option> <option value="g">G</option> <option value="h">H</option> <option value="i">I</option> <option value="j">J</option>
+                        <option value="k">K</option> <option value="l">L</option> <option value="m">M</option> <option value="n">N</option> <option value="o">O</option> <option value="p">P</option> <option value="q">Q</option> <option value="r">R</option> <option value="s">S</option> <option value="t">T</option> <option value="u">U</option> <option value="v">V</option>
+                        <option value="w">W</option> <option value="x">X</option> <option value="y">Y</option> <option value="z">Z</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="letter7" id="letter7">
+                        <option value="NA">None</option> <option disabled class="disabl" value="*">Wildcard</option> <option value="a">A</option> <option value="b">B</option> <option value="c">C</option> <option value="d">D</option> <option value="e">E</option> <option value="f">F</option> <option value="g">G</option> <option value="h">H</option> <option value="i">I</option> <option value="j">J</option>
+                        <option value="k">K</option> <option value="l">L</option> <option value="m">M</option> <option value="n">N</option> <option value="o">O</option> <option value="p">P</option> <option value="q">Q</option> <option value="r">R</option> <option value="s">S</option> <option value="t">T</option> <option value="u">U</option> <option value="v">V</option>
+                        <option value="w">W</option> <option value="x">X</option> <option value="y">Y</option> <option value="z">Z</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" name="pos1" id="pos1" placeholder="Position">
+                </td>
+                <td>
+                    <input type="text" name="pos2" id="pos2" placeholder="Position">
+                </td>
+                <td>
+                    <input type="text" name="pos3" id="pos3" placeholder="Position">
+                </td>
+                <td>
+                    <input type="text" name="pos4" id="pos4" placeholder="Position">
+                </td>
+                <td>
+                    <input type="text" name="pos5" id="pos5" placeholder="Position">
+                </td>
+                <td>
+                    <input type="text" name="pos6" id="pos6" placeholder="Position">
+                </td>
+                <td>
+                    <input type="text" name="pos7" id="pos7" placeholder="Position">
+                </td>
+            </tr>
+        </table>
+        
+        <br>
+        
+        <!--Word Length Choice-->
+        <div id="wordLen">
+            Enter word length (1-7): <input type="text" name="wLen" id="wLen" placeholder="#">
+        </div>
+        
+        <br>
+        
+        <button class="font" type="button" onclick="validate()">Submit</button>
+        <!--<button class="font" type="button" onclick="myFunction()" value="Submit">Submit</button>-->
+    
+     </form>
+    </div>
+    
+    <div id="results">
+        
+        <h1 class="title" id="rTitle">Results</h1>
+      
+        <table align="center" id="wordTable">
+            <tr>
+                <td style="white-space:pre-wrap; word-wrap:break-word" id="r1R"></td>
+                <td style="white-space:pre-wrap; word-wrap:break-word" id="r2R"></td>
+                <td style="white-space:pre-wrap; word-wrap:break-word" id="r3R"></td>
+                <td style="white-space:pre-wrap; word-wrap:break-word" id="r4R"></td>
+            </tr>
+        </table>
+        
+    </div>
+  
+    
+    
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script type="text/javascript" src="js/scrabAction.js"></script> 
+    
+
+
+</body>
+</html>

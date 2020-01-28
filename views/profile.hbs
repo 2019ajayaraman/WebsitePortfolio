@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Login Profile</title>
+    <link href="css/nav.css" rel="stylesheet" type="text/css" />
+    <link href="css/profile.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+      
+    <ul>
+        <li><a href="about">About</a></li>
+        <li><a href="/2019ajayaram">Home</a></li>
+        <li><a class="active" href="javascript:void(0)">Settings</a></li>
+        <li class="view" style="float:right"><a class="active" href="javascript:void(0)">Visit #: {{views}}</a></li>
+    </ul>
+    
+    
+
+   <h1>Profile</h1>
+   <div id="login">
+       <!--center button middle of page, BIG -->
+       <button class="center" type="button" onclick="location.href='{{link}}'">Authenticate</button>
+   </div>
+   
+   <div id="display">
+        <p>Hello {{name}}!</p>
+        <p>This is visit # {{views}}</p>
+        <p style="font-size: 20px;">Basic Information: </p>
+        <p>Email: {{email}}</p>
+        <p>Profile Picture: </p>
+        <img src="{{pic}}"> 
+        <br>
+        <a href="counselor">Find Out About Your Counselor</a> <a href="grade">Find Out About Your Grade</button>
+   </div>
+   
+   
+
+  </body>
+  
+  <script>
+      if ({{login}}){
+          document.getElementById("login").style.display = "initial";
+          document.getElementById("display").style.display = "none";
+      }
+      else
+      {
+          document.getElementById("login").style.display = "none";
+          document.getElementById("display").style.display = "initial";
+      }
+  </script>
+</html>

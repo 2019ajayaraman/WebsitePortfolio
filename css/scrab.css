@@ -1,0 +1,106 @@
+.title {
+    font-family: 'Tangerine', cursive;
+    font-weight: 400;
+    font-size: 50px;
+    text-align: center;
+    color: #351e47;
+    margin-bottom: 5px;
+}
+
+#rTitle {
+    font-size: 40px;
+}
+
+option {
+    text-align: center;
+    color: #8325aa;
+    font-family: serif; 
+    font-size: 16px;
+}
+
+button{
+    font-family: serif; 
+    font-size: 16px;
+    text-align: center;
+}
+
+td {
+    text-align: center;
+    margin: 0 auto;
+}
+
+#letters{
+    width: 50%;
+}
+
+
+.wild {
+    
+    color: black;
+    background-color: #e6a8ff;
+    border-color: #e6a8ff;
+    font-family: serif; 
+    font-size: 16px;
+    margin: 10px;
+}
+
+.disabl
+{
+    background-color: #b7b7b7;
+}
+
+select {
+    width: 85px;
+    font-family: serif; 
+    font-size: 16px;
+}
+
+input {
+    width: 55px;
+    font-family: serif; 
+    font-size: 16px;
+    text-align: center;
+}
+
+#wildC0{
+    background-color: purple;
+    border-color: purple;
+    color: white;
+}
+#wLen {
+    width:25px;
+    text-align: center;
+    font-family: serif; 
+    font-size: 16px;
+}
+
+#wildcard{
+    display: none;
+}
+
+.form{
+    margin: auto; 
+    width: 99%;
+    text-align:center;
+}
+#instructions {
+    color: #351e47;
+    font-family: serif; 
+    font-size: 13px;
+    margin: auto;
+    width: 75%;
+    text-align: center;
+}
+
+#results {
+    display: none;
+}
+
+#wordTable {
+    width: 50%;
+}
+
+.view a:hover{
+    background-color: #563d7c;
+}
+

@@ -1,0 +1,79 @@
+.title {
+    font-family: 'Tangerine', cursive;
+    font-weight: 400;
+    font-size: 50px;
+    text-align: center;
+    color: #351e47;
+    margin-bottom: 5px;
+}
+
+
+option {
+    text-align: center;
+    color: #8325aa;
+    font-family: serif; 
+    font-size: 16px;
+}
+
+button{
+    font-family: serif; 
+    font-size: 16px;
+    text-align: center;
+}
+
+.center {
+    margin-left: 20px;
+}
+
+
+select {
+    width: 85px;
+    font-family: serif; 
+    font-size: 16px;
+}
+
+input {
+    width: 100px;
+    font-family: serif; 
+    font-size: 14px;
+    text-align: center;
+}
+
+
+.form{
+    margin: auto; 
+    width: 99%;
+    text-align:center;
+}
+
+.subtitle {
+    font-family: 'Tangerine', cursive;
+    font-weight: 400;
+    font-size: 30px;
+    color: #351e47;
+    margin-bottom: 1px;
+    margin-top: 3px;
+}
+
+.view a:hover{
+    background-color: #563d7c;
+}
+
+#go {
+    color: green;
+    visibility: hidden;
+}
+
+#err {
+    color: red;
+    visibility: hidden;
+}
+
+#err2 {
+    color: red;
+    visibility: hidden;
+}
+
+#editInfo {
+    visibility: hidden;
+}

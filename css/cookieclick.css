@@ -1,0 +1,90 @@
+.title {
+    font-family: 'Tangerine', cursive;
+    font-weight: 400;
+    font-size: 50px;
+    text-align: center;
+    color: #351e47;
+    margin-bottom: 5px;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  /*border-bottom: 1px dotted black;*/
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 100px;
+  background-color: #563d7c;
+  font-size: 12px;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+#submInfo {
+    display: none;
+}
+
+#rankings {
+    visibility: hidden;
+    margin-top: 50px;
+}
+
+#rankTable {
+    width: 50%;
+    text-align: center;
+}
+
+.side {
+    width: 23%;
+
+    float: left;
+    background-color: #baaff7;
+    position: absolute;
+    height: 110%;
+    overflow: auto;
+    
+    padding: 15px;
+    line-height: 20px;
+    
+}
+.box {
+    background-color: #f4f7f7;
+    padding: 15px;
+    height: 450px;
+    width: 70%;
+    float: right;
+}
+
+.storeTitle, .instruct {
+    text-align: center;
+    font-weight: lighter;
+    font-family: 'Tangerine', cursive;
+    font-size: 40px;
+}
+
+#cookieSell {
+    width: 200px;
+    height: 200px;
+}
+
+.sideBside {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.store {
+    margin-left: 70px;
+    
+}

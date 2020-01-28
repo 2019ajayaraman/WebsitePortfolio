@@ -1,0 +1,73 @@
+#gameB {
+    display: block;
+    margin: auto;
+}
+
+svg {
+    font-family: 'Stylish', sans-serif;
+    font-size: 40px;
+}
+
+#winMessage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-15%, 0%);
+    
+    font-family: 'Tangerine', cursive;
+    font-weight: 400;
+    font-size: 200px;
+    color: #ff9603;
+}
+
+.title {
+    font-family: 'Tangerine', cursive;
+    font-weight: 400;
+    font-size: 50px;
+    text-align: center;
+    color: #351e47;
+    margin-bottom: 7px;
+    margin-top: 0px;
+}
+
+/*#message {
+    width: 500px;
+    height: 50px;
+    font-family: serif; 
+    font-size: 16px;
+    
+}
+
+#submit {
+    text-align: center;
+    font-family: serif; 
+    font-size: 16px;
+}*/
+
+.box {
+    background-color: #f4f7f7;
+    padding: 15px;
+    height: 600px;
+    width: 70%;
+    float: right;
+}
+
+.side {
+    width: 23%;
+
+    float: left;
+    background-color: #baaff7;
+    position: absolute;
+    height: 110%;
+    overflow: auto;
+    
+    padding: 15px;
+    line-height: 20px;
+    
+}
+
+button {
+    font-family: 'Tangerine', cursive;
+    font-weight: 400;
+    font-size: 30px;
+}

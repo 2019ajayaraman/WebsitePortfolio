@@ -1,0 +1,66 @@
+<!-- 
+https://hackernoon.com/how-to-build-a-multiplayer-browser-game-4a793818c29b -> how to make multiplayer if choose to
+
+how to play -> drop coin into connect-4 contraption to have a 4-connecion (after each move check to see if proper connection is there? -> algorithm needed) 
+-->
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="css/nav.css">
+        <link rel="stylesheet" type="text/css" href="css/connect4.css">
+        <link href="https://fonts.googleapis.com/css?family=Tangerine:400,700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Stylish&display=swap" rel="stylesheet">
+        <title>Connect 4</title>
+        
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script> 
+        
+        
+        <script>
+            // create the socket object. you need to add a path when you run in subspace, like us
+            var socket = io.connect('https://user.tjhsst.edu/', { path: '/2019ajayaram/'  });
+            socket.on('server_msg', function(respond){    // create a client-side callback function
+                
+                document.getElementById("{{name}}"+"response").appendChild(divE);
+                console.log(respond);
+
+            });
+        </script>
+        
+        <script type="text/javascript">
+            function doSocket() {
+                var dict4 = document.getElementById('message').value;
+                socket.emit('client_evt', /*{ keys : 'values'}*/dict4 ); // client-side socket emit
+            }
+        </script>
+        
+        
+        
+        
+    </head>
+    <body>
+        
+
+        <ul>
+ 
+            <li class="view" style="float:right"><a class="active" href="javascript:void(0)">{{name}}</a></li>
+            <li class="view" style="text-align: center;"><a class="active" href="javascript:void(0)"><span id="scoreWon">Games Won: {{won}}</span></a></li>
+            <li class="view" style="float:left;"><a class="active" href="javascript:void(0)"><span id="scorePlayed">Games Played: {{played}}</span></a></li>
+        </ul>
+        
+
+        <div style="text-align: center;">
+            
+        <textarea wrap="hard" style="display: inline-block" id="message" name="message" rows="4" cols="50"  placeholder="message..."></textarea><br>
+        <button style="display: inline-block" type="button" id="submit" onclick="doSocket()">Submit</button>
+        </div>
+        
+        
+        <div id='response'></div>
+        
+
+
+
+    </body>
+</html> 

@@ -1,0 +1,15 @@
+.center {
+  width: 35%;
+  padding: 20px;
+  text-align: center;
+    display: inline-block;
+}
+
+.view a:hover{
+    background-color: #563d7c;
+}
+
+.display {
+    background-color: purple;
+    padding: 20px;
+}

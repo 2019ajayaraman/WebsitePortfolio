@@ -1,0 +1,103 @@
+.gameTitle {
+    font-family: 'Tangerine', cursive;
+    font-weight: 400;
+    font-size: 50px;
+    text-align: center;
+    color: #351e47;
+}
+
+.timer {
+    display: block;
+    text-align: center;
+}
+
+.button {
+    display: inline-block;
+}
+
+.center {
+    text-align: center;
+    display: inline-block;
+}
+
+
+.time a:hover{
+    background-color: #563d7c;
+}
+
+#whatCapital {
+    margin-bottom: 5px;
+    margin-top: 0px;
+    font-size: 40px;
+    
+    font-family: 'Tangerine', cursive;
+    font-weight: 400;
+    
+    color: #5e0eb5;
+}
+
+.box {
+    background-color: #f4f7f7;
+    padding: 15px;
+    
+    width: 70%;
+    float: right;
+}
+
+.side {
+    width: 23%;
+
+    float: left;
+    background-color: #baaff7;
+    position: absolute;
+    height: 110%;
+    overflow: auto;
+    
+    padding: 15px;
+    line-height: 20px;
+    
+}
+
+.page {
+    display: inline;
+}
+
+.instrucTitle {
+    text-align: center;
+    font-weight: lighter;
+    text-decoration: underline;
+}
+
+.score {
+    background-color: #e2c9ff;
+    padding: 15px;
+    
+    margin: 6px;
+    
+    width: 69%;
+    float: right; 
+}
+
+.inline{
+    display: inline;
+}
+
+.scoreTitle{
+    font-family: 'Tangerine', cursive;
+    font-weight: 500;
+    font-size: 40px;
+    text-align: center;
+    color: #351e47;
+    margin: -10px;
+}
+
+.inlineBlockScore {
+    display:inline-block; 
+    margin: 0px 15px 15px 15px;
+}
+
+button {
+   font-family: 'Tangerine', cursive;
+    font-weight: 400;
+    font-size: 25px;
+}

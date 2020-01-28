@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/nav.css">
+    <link rel="stylesheet" type="text/css" href="css/database.css"> 
+    <link href="https://fonts.googleapis.com/css?family=Tangerine:400,700" rel="stylesheet">
+    <title>Database SQL</title>
+</head>
+<body>
+    <ul>
+        <li><a href="about">About</a></li>
+        <li><a href="/2019ajayaram">Home</a></li>
+        <li><a class="active" href="javascript:void(0)">Settings</a></li>
+    </ul>
+    
+    
+
+    <h1 class="title">Database</h1>
+    
+    <div class="center">
+    <h2 class="subtitle">Access Database</h2>
+    <form id="formChoose" name="formChoose">
+        <select id="dropDown" name="dropDown">
+            {{#each results as |item|}}
+            <option value={{this}}>{{this}}</option>
+            {{/each}}
+        </select>
+        
+        
+        <button class="font" type="button" onclick="validateSelect()">Select</button>
+        <span id="err2">*Please select an option</span>
+    
+    
+    <div id="editInfo">
+    <p id="idSelect">ID: # is </p>
+        <input type="text" name="modName" id="modName" placeholder="Modified Name">
+        <button class="font" type="button" onclick="validateMod()">Modify</button>
+    </div>
+    </form>
+    
+    </div>
+
+    <hr>
+    <br>
+    
+    <div class="center">
+    <h2 class="subtitle">Add to Database</h2>
+    <form id="formAdd">
+        ID: <input type="text" name="newID" id="newID" placeholder="id"> <span id="err">*Error: ID already in use.</span>
+        <br>
+        <br>
+        Name: <input type="text" name="newName" id="newName" placeholder="name">
+        <br>
+        <br>
+        <button class="font" type="button" onclick="validateAdd()">Submit</button>
+        <p id="go"> &#x2714; Your data has been added</p>
+    </form>
+    </div>
+    
+    
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+    <script type="text/javascript" src="js/database.js"></script> 
+
+
+</body>
+</html>
+

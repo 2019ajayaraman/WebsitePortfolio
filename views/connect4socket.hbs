@@ -1,0 +1,179 @@
+<!-- 
+https://hackernoon.com/how-to-build-a-multiplayer-browser-game-4a793818c29b -> how to make multiplayer if choose to
+
+how to play -> drop coin into connect-4 contraption to have a 4-connecion (after each move check to see if proper connection is there? -> algorithm needed) 
+-->
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="css/nav.css">
+        <link rel="stylesheet" type="text/css" href="css/connect4.css">
+        <link href="https://fonts.googleapis.com/css?family=Tangerine:400,700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Stylish&display=swap" rel="stylesheet">
+        <title>Connect 4</title>
+        
+    </head>
+    <body>
+        
+
+        <ul>
+            <li class="view" style="float:right"><a class="active" href="javascript:void(0)">{{name}}</a></li>
+            <li class="view" style="text-align: center;"><a class="active" href="javascript:void(0)"><span id="scoreWon">Games Won: {{won}}</span></a></li>
+            <li class="view" style="float:left;"><a class="active" href="javascript:void(0)"><span id="scorePlayed">Games Played: {{played}}</span></a></li>
+        </ul>
+        
+
+        
+        
+        
+        <div class="side">
+            <h2 class="instruct">Instructions</h2>
+            <p>
+                Click on the triangles to drop coins into the connect 4 grid. <br><br>
+                You will be red, the computer will be yellow. <br><br>
+                When a connection of 4 is made, the game is over. <br><br>
+                Your stats are listed at the top of the game. <br><br>
+                Happy playing! <br><br><br>
+
+            </p>
+            <button type="button" style="text-align:center;" onclick="reset()">Reset</button>
+            
+        </div>
+        
+        
+        <div class="box" style="text-align: center;">
+            <h1 class="title">Connect 4</h1>
+
+            <svg id="gameB" width="500px" viewBox="0 0 700 700" xmlns="http://www.w3.org/2000/svg">
+                
+                <defs>
+                    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#4ca1af;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#c4e0e5;stop-opacity:1" />
+                    </linearGradient>
+                    
+                    <linearGradient id="grad2" x1="100%" y1="0%" x2="0%" y2="0%">
+                        <stop offset="0%" style="stop-color:#4ca1af;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#c4e0e5;stop-opacity:1" />
+                    </linearGradient>
+                    
+                    <linearGradient id="gradM" x1="100%" y1="0%" x2="0%" y2="0%">
+                        <stop offset="0%" style="stop-color:#c4e0e5;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#c4e0e5;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                
+                <svg x="0" y="0" id="r1">
+                    <polygon points="5,0 45,78 95,0" fill="url(#grad1)" />
+                    <text x="37" y="39" fill="white">D</text>
+                </svg>
+                
+                <svg x="100" y="0" id="r2">
+                    <polygon  points="5,0 45,78 95,0" fill="url(#grad1)" />
+                </svg>
+                
+                <svg x="200" y="0" id="r3">
+                    <polygon  points="5,0 45,78 95,0" fill="url(#grad1)" />
+                    <text x="37" y="39" fill="white">R</text>
+                </svg>
+                
+                <svg x="300" y="0" id="r4">
+                    <polygon  points="5,0 45,78 95,0" fill="url(#gradM)" />
+                </svg>
+                
+                <svg x="400" y="0" id="r5">
+                    <polygon  points="5,0 45,78 95,0" fill="url(#grad2)" />
+                    <text x="37" y="39" fill="white">O</text>
+                </svg>
+                
+                <svg x="500" y="0" id="r6">
+                    <polygon  points="5,0 45,78 95,0" fill="url(#grad2)" />
+                </svg>
+                
+                <svg x="600" y="0"id="r7">
+                    <polygon  points="5,0 45,78 95,0" fill="url(#grad2)" />
+                    <text x="37" y="39" fill="white">P</text>
+                </svg>
+    
+                
+                <svg x="0" y="600"><rect width="100" height="100" fill="#123cd1"></rect><circle id="r1c1" cx="50" cy="50" r="40" fill="white"></circle></svg>
+                <svg x="0" y="100"><rect width="100" height="100" fill="#123cd1"></rect><circle id="r1c6" cx="50" cy="50" r="40" fill="white"></circle></svg>
+                <svg x="0" y="200"><rect width="100" height="100" fill="#123cd1"></rect><circle id="r1c5" cx="50" cy="50" r="40" fill="white"></circle></svg>
+                <svg x="0" y="300"><rect width="100" height="100" fill="#123cd1"></rect><circle id="r1c4" cx="50" cy="50" r="40" fill="white"></circle></svg>
+                <svg x="0" y="400"><rect width="100" height="100" fill="#123cd1"></rect><circle id="r1c3" cx="50" cy="50" r="40" fill="white"></circle></svg>
+                <svg x="0" y="500"><rect width="100" height="100" fill="#123cd1"></rect><circle id="r1c2" cx="50" cy="50" r="40" fill="white"></circle></svg>
+                
+                <svg x="100" y="600"><rect width="100" height="100" fill="#123cd1"></rect><circle id="r2c1" cx="50" cy="50" r="40" fill="white"></circle></svg>
+                <svg x="100" y="100"><rect width="100" height="100" fill="#123cd1"></rect><circle id="r2c6" cx="50" cy="50" r="40" fill="white"></circle></svg>
+                <svg x="100" y="200"><rect width="100" height="100" fill="#123cd1"></rect><circle id="r2c5" cx="50" cy="50" r="40" fill="white"></circle></svg>
+                <svg x="100" y="300"><rect width="100" height="100" fill="#123cd1"></rect><circle id="r2c4" cx="50" cy="50" r="40" fill="white"></circle></svg>
+                <svg x="100" y="400"><rect width="100" height="100" fill="#123cd1"></rect><circle id="r2c3" cx="50" cy="50" r="40" fill="white"></circle></svg>
+                <svg x="100" y="500"><rect width="100" height="100" fill="#123cd1"></rect><circle id="r2c2" cx="50" cy="50" r="40" fill="white"></circle></svg>
+                
+                <svg x="200" y="600"><rect width="100" height="100" fill="#123cd1"></rect><circle id="r3c1" cx="50" cy="50" r="40" fill="white"></circle></svg>
+                <svg x="200" y="100"><rect width="100" height="100" fill="#123cd1"></rect><circle id="r3c6" cx="50" cy="50" r="40" fill="white"></circle></svg>
+                <svg x="200" y="200"><rect width="100" height="100" fill="#123cd1"></rect><circle id="r3c5" cx="50" cy="50" r="40" fill="white"></circle></svg>
+                <svg x="200" y="300"><rect width="100" height="100" fill="#123cd1"></rect><circle id="r3c4" cx="50" cy="50" r="40" fill="white"></circle></svg>
+                <svg x="200" y="400"><rect width="100" height="100" fill="#123cd1"></rect><circle id="r3c3" cx="50" cy="50" r="40" fill="white"></circle></svg>
+                <svg x="200" y="500"><rect width="100" height="100" fill="#123cd1"></rect><circle id="r3c2" cx="50" cy="50" r="40" fill="white"></circle></svg>
+                
+                <svg x="300" y="600"><rect width="100" height="100" fill="#123cd1"></rect><circle id="r4c1" cx="50" cy="50" r="40" fill="white"></circle></svg>
+                <svg x="300" y="100"><rect width="100" height="100" fill="#123cd1"></rect><circle id="r4c6" cx="50" cy="50" r="40" fill="white"></circle></svg>
+                <svg x="300" y="200"><rect width="100" height="100" fill="#123cd1"></rect><circle id="r4c5" cx="50" cy="50" r="40" fill="white"></circle></svg>
+                <svg x="300" y="300"><rect width="100" height="100" fill="#123cd1"></rect><circle id="r4c4" cx="50" cy="50" r="40" fill="white"></circle></svg>
+                <svg x="300" y="400"><rect width="100" height="100" fill="#123cd1"></rect><circle id="r4c3" cx="50" cy="50" r="40" fill="white"></circle></svg>
+                <svg x="300" y="500"><rect width="100" height="100" fill="#123cd1"></rect><circle id="r4c2" cx="50" cy="50" r="40" fill="white"></circle></svg>
+                
+                <svg x="400" y="600"><rect width="100" height="100" fill="#123cd1"></rect><circle id="r5c1" cx="50" cy="50" r="40" fill="white"></circle></svg>
+                <svg x="400" y="100"><rect width="100" height="100" fill="#123cd1"></rect><circle id="r5c6" cx="50" cy="50" r="40" fill="white"></circle></svg>
+                <svg x="400" y="200"><rect width="100" height="100" fill="#123cd1"></rect><circle id="r5c5" cx="50" cy="50" r="40" fill="white"></circle></svg>
+                <svg x="400" y="300"><rect width="100" height="100" fill="#123cd1"></rect><circle id="r5c4" cx="50" cy="50" r="40" fill="white"></circle></svg>
+                <svg x="400" y="400"><rect width="100" height="100" fill="#123cd1"></rect><circle id="r5c3" cx="50" cy="50" r="40" fill="white"></circle></svg>
+                <svg x="400" y="500"><rect width="100" height="100" fill="#123cd1"></rect><circle id="r5c2" cx="50" cy="50" r="40" fill="white"></circle></svg>
+                
+                <svg x="500" y="600"><rect width="100" height="100" fill="#123cd1"></rect><circle id="r6c1" cx="50" cy="50" r="40" fill="white"></circle></svg>
+                <svg x="500" y="100"><rect width="100" height="100" fill="#123cd1"></rect><circle id="r6c6" cx="50" cy="50" r="40" fill="white"></circle></svg>
+                <svg x="500" y="200"><rect width="100" height="100" fill="#123cd1"></rect><circle id="r6c5" cx="50" cy="50" r="40" fill="white"></circle></svg>
+                <svg x="500" y="300"><rect width="100" height="100" fill="#123cd1"></rect><circle id="r6c4" cx="50" cy="50" r="40" fill="white"></circle></svg>
+                <svg x="500" y="400"><rect width="100" height="100" fill="#123cd1"></rect><circle id="r6c3" cx="50" cy="50" r="40" fill="white"></circle></svg>
+                <svg x="500" y="500"><rect width="100" height="100" fill="#123cd1"></rect><circle id="r6c2" cx="50" cy="50" r="40" fill="white"></circle></svg>
+                
+                <svg x="600" y="600"><rect width="100" height="100" fill="#123cd1"></rect><circle id="r7c1" cx="50" cy="50" r="40" fill="white"></circle></svg>
+                <svg x="600" y="100"><rect width="100" height="100" fill="#123cd1"></rect><circle id="r7c6" cx="50" cy="50" r="40" fill="white"></circle></svg>
+                <svg x="600" y="200"><rect width="100" height="100" fill="#123cd1"></rect><circle id="r7c5" cx="50" cy="50" r="40" fill="white"></circle></svg>
+                <svg x="600" y="300"><rect width="100" height="100" fill="#123cd1"></rect><circle id="r7c4" cx="50" cy="50" r="40" fill="white"></circle></svg>
+                <svg x="600" y="400"><rect width="100" height="100" fill="#123cd1"></rect><circle id="r7c3" cx="50" cy="50" r="40" fill="white"></circle></svg>
+                <svg x="600" y="500"><rect width="100" height="100" fill="#123cd1"></rect><circle id="r7c2" cx="50" cy="50" r="40" fill="white"></circle></svg>            
+            </svg>
+            
+            
+            
+            
+            <form id="submInfo" style="display: none;">
+                <input type="text" name="played" id="played">
+                <input type="text" name="won" id="won">
+                <input type="text" name="ionID" id="ionID">
+            </form>
+            
+            <div id="winMessage"></div>
+        
+        </div>
+        
+
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <script>
+            var played = {{played}};
+            var won = {{won}};
+            var name = "{{name}}";
+        </script>
+        <script type="text/javascript" src="js/connect4.js"></script>
+        <script type="text/javascript" src="js/connect4_otherP.js"></script> 
+        
+        
+
+
+    </body>
+</html> 

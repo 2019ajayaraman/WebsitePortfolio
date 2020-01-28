@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/nav.css">
+    <link rel="stylesheet" type="text/css" href="css/cookieclick.css"> 
+    <link href="https://fonts.googleapis.com/css?family=Tangerine:400,700" rel="stylesheet">
+    <title>Cookie Clicker</title>
+</head>
+<body>
+    <ul>
+        <li><a href="about">About</a></li>
+        <li><a href="/2019ajayaram">Home</a></li>
+        <li><a class="active" href="javascript:void(0)">Settings</a></li>
+        <li class="view" style="float:right"><a class="active" href="javascript:void(0)">{{user}}</a></li>
+    </ul>
+    
+    
+
+    
+    
+    
+    <div class="side">
+        <h2 class="instruct">Instructions</h2>
+        <p>
+            Click on the cookie to sell cookies and get money.<br><br>
+            At the store on the right, you can increase the amount of cookies you sell per click and you can automatically sell cookies by the second! <br><br>
+            The store also keeps track of your boosts and auto-sell values. <br><br>
+            If you want to leave, remember to click save to keep your money for the next time you login. <br><br>
+            To see the current top 5 players, click "Display Rankings".
+        </p>
+        
+    </div>
+    
+    
+    <div class="box" style="text-align: center;">
+        
+        <h1 class="title">Cookie Clicker</h1>
+        <div class="sideBside">
+            <div>
+                <p style="text-align: center; font-size: 30px;">$<span id="cookieVal">{{score}}</span></p>
+                <input class="font" type="image" src="img/cookie.png" onclick="cookieClick()" id="cookieSell"></input>
+            </div>
+    
+            <br>
+
+    
+            <div style="text-align: center;">
+                <button class="font" type="button" onclick="saveValid()" id="save">Save</button>
+                <button class="font" type="button" onclick="displayRank()" id="rank">Display Rankings</button>
+            </div>
+        </div>
+        <div class="sideBside store">
+            <h2 class="storeTitle">Store</h2>
+            <p style="font-size: 16px;">Boost: <span id="boostDipl">{{boost}}</span> cookies/click</p>
+            Purchase: <div class="tooltip"> <button class="font" type="button" onclick="cookieBoost()" id="cookieBoost">$10</button>
+                <span class="tooltiptext" id="boostBuyInfo"></span>
+            </div>
+        
+            <hr> 
+        
+            <p style="font-size: 16px;">Auto Sell: <span id="autotDipl">{{auto}}</span> cookies/sec</p>
+            Purchase: <div class="tooltip"> <button class="font" type="button" onclick="cookieAuto()" id="cookieAuto">$15</button>
+            <span class="tooltiptext" id="autoBuyInfo"></span>
+        </div>
+        
+        
+        <form id="submInfo">
+        <input type="text" name="scoreMoney" id="scoreMoney">
+        <input type="text" name="boostNum" id="boostNum">
+        <input type="text" name="autoNum" id="autoNum">
+    </form>
+    
+    </div>
+    
+    <div id="rankings" align="center">
+    <h3>Rankings</h3>
+    <table id=rankTable>
+        <tr>
+            <th>Rank</th>
+            <th>Player ID</th>
+            <th>Score</th>
+        </tr>
+        <tr>
+            <td id="i1"></td>
+            <td id="p1"></td>
+            <td id="s1"></td>
+        </tr>
+        <tr>
+            <td id="i2"></td>
+            <td id="p2"></td>
+            <td id="s2"></td>
+        </tr>
+        <tr>
+            <td id="i3"></td>
+            <td id="p3"></td>
+            <td id="s3"></td>
+        </tr>
+        <tr>
+            <td id="i4"></td>
+            <td id="p4"></td>
+            <td id="s4"></td>
+        </tr>
+        <tr>
+            <td id="i5"></td>
+            <td id="p5"></td>
+            <td id="s5"></td>
+        </tr>
+    </table>
+    
+    </div>
+    
+    
+    
+    
+    
+    <!-- PLANNING ???
+        -BUNCH of buttons 
+        -Cookie as button (start off w/ regular button)
+        -Purchase multi sell (edit booster) 
+        -Display of clicks/cookies sold
+    -->
+
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    
+    <script>
+        var money = {{score}};
+        var amount = {{boost}};
+        var thresholdB = Math.pow(10, amount);
+        
+        var autoAmount = {{auto}};
+        var thresholdA = Math.pow(15, (autoAmount/2)+1); //auto chefs
+        
+        $('#boostBuyInfo').html((amount+1)+" cookies/click");
+        $('#cookieBoost').html("$"+thresholdB)
+        if (money < thresholdB){
+            document.getElementById("cookieBoost").disabled = true;
+        }
+        
+    </script>
+    
+    <script type="text/javascript" src="js/cookieclick.js"></script> 
+
+
+
+</body>
+</html>
+

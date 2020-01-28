@@ -1,0 +1,31 @@
+.grn {
+    color: #138934;
+}
+
+.purp {
+    color: #5e158c;
+}
+
+#color {
+    margin: 10px;
+}
+
+#results{
+    visibility: hidden;
+}
+
+#message{
+    visibility: hidden;
+}
+
+.font {
+    font-family: serif;
+    font-size: 16px;
+}
+
+.title {
+    font-family: 'Tangerine', cursive;
+    font-weight: 400;
+    font-size: 40px;
+    color: #351e47;
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Login Profile</title>
+    <link href="css/nav.css" rel="stylesheet" type="text/css" />
+    <link href="css/profile.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+      
+    <ul>
+        <li><a href="about">About</a></li>
+        <li><a href="/2019ajayaram">Home</a></li>
+        <li><a class="active" href="javascript:void(0)">Settings</a></li>
+        <li class="view" style="float:right"><a class="active" href="javascript:void(0)">Visit #: {{views}}</a></li>
+    </ul>
+    
+    
+
+   <h1>Profile</h1>
+   <div id="counselor">
+       <p>Hello {{name}}!</p>
+        <p>This is visit # {{views}}</p>
+        <p style="font-size: 20px;">Counselor Info:</p>
+        <p>Name: {{cName}}</p>
+        <p>Email: {{cEmail}}</p>
+        <br><br> <a href="login">Back</a>
+   </div>
+   
+
+   <div id="grad">
+        <p>Hello {{name}}!</p>
+        <p>This is visit # {{views}}</p>
+        <p style="font-size: 20px;">Grade Info: </p>
+        <p>You are in grade {{gradeNum}} so you are a {{gradeName}}</p>
+        <p>You will graduate in {{grad}}</p>
+        <br><br> <a href="login">Back</a>
+        
+   </div>
+   
+   
+   
+
+
+  </body>
+  
+  <script>
+      if ({{pageC}}){
+          document.getElementById("counselor").style.display = "initial";
+          document.getElementById("grad").style.display = "none";
+      }
+      else
+      {
+          document.getElementById("counselor").style.display = "none";
+          document.getElementById("grad").style.display = "initial";
+      }
+  </script>
+</html>
